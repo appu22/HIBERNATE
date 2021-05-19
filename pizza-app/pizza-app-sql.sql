@@ -1,0 +1,1 @@
+SELECT * FROM hibernate.pizza_table;
