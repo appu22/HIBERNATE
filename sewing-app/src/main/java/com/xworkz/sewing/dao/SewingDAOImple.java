@@ -1,34 +1,32 @@
-package com.xworkz.app.dao;
+package com.xworkz.sewing.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.xworkz.app.DTO.PizzaDTO;
+import com.xworkz.sewing.dto.SewingDTO;
 
-public class PizzaDAOImple implements PizzaDAO {
+public class SewingDAOImple implements SewingDAO {
 
-	@Override
-	public void save(PizzaDTO pizzadto) {
+	public void save(SewingDTO dto) {
 		System.out.println("inside save method");
 		SessionFactory sessionFactory = null;
 		Session session = null;
-//		Transaction trasaction = null;
+		Transaction trasaction = null;
 		try {
-			Configuration configuration = new Configuration();// creating object
-			configuration.configure("hibernate.cfg.xml");// optional
-			// hibernate framework will started
-			sessionFactory = configuration.buildSessionFactory();// creation session factory
-			session = sessionFactory.openSession();// perform crud operation
-//			trasaction = session.beginTransaction();
-			session.save(pizzadto);
-//			session.persist(pizzadto);
-//			trasaction.commit();
+			Configuration configuration = new Configuration();
+			configuration.configure("hibernate.cfg.xml");
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			trasaction = session.beginTransaction();
+//			session.save(dto);
+			session.persist(dto);
+			trasaction.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
-//			trasaction.rollback();
+			trasaction.rollback();
 
 		} finally {
 			if (session != null) {
@@ -46,16 +44,15 @@ public class PizzaDAOImple implements PizzaDAO {
 		}
 	}
 
-	@Override
-	public void getPizza() {
-		System.out.println("inside getpizza method....");
+	public void getSewingData() {
+		System.out.println("inside sewing method....");
 		SessionFactory sessionFactory = null;
 		Session openSession = null;
 		try {
 			sessionFactory = new Configuration().configure().buildSessionFactory();
 			openSession = sessionFactory.openSession();
-			PizzaDTO pizzadto = openSession.get(PizzaDTO.class, 9);
-			System.out.println(pizzadto.toString());
+			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 1);
+			System.out.println(sewingDTO);
 
 		} catch (Exception exception) {
 			exception.printStackTrace();

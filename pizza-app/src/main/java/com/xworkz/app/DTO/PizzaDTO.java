@@ -1,7 +1,6 @@
 package com.xworkz.app.DTO;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +11,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
+
 @Getter
+@Setter
 @Entity
 @ToString
 @Table(name = "pizza_table")

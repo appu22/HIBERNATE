@@ -1,34 +1,33 @@
-package com.xworkz.app.dao;
+package com.xworkz.instagram.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.xworkz.app.DTO.PizzaDTO;
+import com.xworkz.instagram.dto.InstagramDTO;
 
-public class PizzaDAOImple implements PizzaDAO {
+public class InstagramDAOImple implements InstagramDAO {
 
-	@Override
-	public void save(PizzaDTO pizzadto) {
+	public void save(InstagramDTO instagramDTO) {
+
 		System.out.println("inside save method");
 		SessionFactory sessionFactory = null;
 		Session session = null;
-//		Transaction trasaction = null;
+		Transaction trasaction = null;
 		try {
-			Configuration configuration = new Configuration();// creating object
-			configuration.configure("hibernate.cfg.xml");// optional
-			// hibernate framework will started
-			sessionFactory = configuration.buildSessionFactory();// creation session factory
-			session = sessionFactory.openSession();// perform crud operation
-//			trasaction = session.beginTransaction();
-			session.save(pizzadto);
-//			session.persist(pizzadto);
-//			trasaction.commit();
+			Configuration configuration = new Configuration();
+			configuration.configure("hibernate.cfg.xml");
+			sessionFactory = configuration.buildSessionFactory();
+			session = sessionFactory.openSession();
+			trasaction = session.beginTransaction();
+//			session.save(instagramDTO);
+			session.persist(instagramDTO);
+			trasaction.commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
-//			trasaction.rollback();
+			trasaction.rollback();
 
 		} finally {
 			if (session != null) {
@@ -46,16 +45,15 @@ public class PizzaDAOImple implements PizzaDAO {
 		}
 	}
 
-	@Override
-	public void getPizza() {
-		System.out.println("inside getpizza method....");
+	public void getInstagram() {
+		System.out.println("inside insta get method....");
 		SessionFactory sessionFactory = null;
 		Session openSession = null;
 		try {
 			sessionFactory = new Configuration().configure().buildSessionFactory();
 			openSession = sessionFactory.openSession();
-			PizzaDTO pizzadto = openSession.get(PizzaDTO.class, 9);
-			System.out.println(pizzadto.toString());
+			InstagramDTO InstagramDTO = openSession.get(InstagramDTO.class, 1);
+			System.out.println(InstagramDTO);
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -75,5 +73,7 @@ public class PizzaDAOImple implements PizzaDAO {
 				System.out.println("Session connection failed");
 			}
 		}
+
 	}
+
 }

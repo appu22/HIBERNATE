@@ -11,19 +11,22 @@ public class PizzaTester {
 
 	public static void main(String[] args) {
 		System.out.println("*************** Program start ***************************");
-		PizzaDTO pizzaDTO = new PizzaDTO("Hot Pizza", 500, "Dharawad", true, "non-veg");
+		PizzaDTO pizzaDTO = new PizzaDTO("Chicken Pizza", 800, "Bangalore", true, "non-veg");
 
 		PizzaDAO daoImple = new PizzaDAOImple();
-		PizzaService pizzaServiceImple = new PizzaServiceImple();
-		boolean validPizzaData = pizzaServiceImple.validPizzaData(pizzaDTO);
-		if (validPizzaData == true) {
-			daoImple.save(pizzaDTO);
-			System.out.println("inside validate data ..."+validPizzaData);
-		}else {
-			System.out.println("Please enter valid data ......");
-		}
-		daoImple.getPizza();
-		System.out.println("*************** Program end ***************************");
-	}
+		
+	daoImple.save(pizzaDTO);
+//		PizzaService pizzaServiceImple = new PizzaServiceImple();
+//		boolean validPizzaData = pizzaServiceImple.validPizzaData(pizzaDTO);
+//		if (validPizzaData == true) {
+//			daoImple.save(pizzaDTO);
+//			System.out.println("inside validate data ..."+validPizzaData);
+//		}else {
+//			System.out.println("Please enter valid data ......");
+//		}
+//		daoImple.getPizza();
+//		System.out.println("*************** Program end ***************************");
+//	}
 
+}
 }
