@@ -1,5 +1,7 @@
 package com.xworkz.sewing;
 
+import com.xworkz.sewing.dao.SewingDAO;
+import com.xworkz.sewing.dao.SewingDAOImple;
 import com.xworkz.sewing.dto.SewingDTO;
 import com.xworkz.sewing.service.SewingService;
 import com.xworkz.sewing.service.SewingServiceImple;
@@ -11,9 +13,10 @@ public class SewingTester {
 		SewingDTO dto = new SewingDTO("asha", "white", "A4562", 5500.0, false);
 
 		SewingService service = new SewingServiceImple();
-
-		service.validateSewingDetails(dto);
-		service.validateFetchData();
+		SewingDAO dao = new SewingDAOImple();
+		dao.updatSewing();
+//		service.validateSewingDetails(dto);
+//		service.validateFetchData();
 
 		System.out.println(" ******* Program  Ended ***********");
 

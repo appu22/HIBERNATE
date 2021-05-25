@@ -73,4 +73,48 @@ public class SewingDAOImple implements SewingDAO {
 			}
 		}
 	}
+
+	public void updatSewing() {
+		System.out.println("inside sewing update  method....");
+		SessionFactory sessionFactory = null;
+		Session openSession = null;
+		Transaction transaction = null;
+		try {
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+			openSession = sessionFactory.openSession();
+			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 1);
+			double price = sewingDTO.getPrice();
+			System.out.println("price " + price);
+			System.out.println("before updating..........");
+			
+			sewingDTO.setName(sewingDTO.getName());
+			sewingDTO.setColor(sewingDTO.getColor());
+			sewingDTO.setPrice(2500);
+			sewingDTO.setModel(sewingDTO.getModel());
+			sewingDTO.isWorking();
+			transaction = openSession.beginTransaction();
+			openSession.update(sewingDTO);
+			transaction.commit();
+			System.out.println("price updated");
+
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			transaction.rollback();
+
+		} finally {
+			if (openSession != null) {
+				openSession.close();
+				System.out.println("Session connection closed.........");
+			} else {
+				System.out.println("Session connectio Failed..........");
+			}
+
+			if (sessionFactory != null) {
+				sessionFactory.close();
+				System.out.println("Session Factory connection closed......!");
+			} else {
+				System.out.println("Session connection failed");
+			}
+		}
+	}
 }
