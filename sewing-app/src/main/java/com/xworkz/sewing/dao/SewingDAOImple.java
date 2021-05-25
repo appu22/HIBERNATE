@@ -86,7 +86,7 @@ public class SewingDAOImple implements SewingDAO {
 			double price = sewingDTO.getPrice();
 			System.out.println("price " + price);
 			System.out.println("before updating..........");
-			
+
 			sewingDTO.setName(sewingDTO.getName());
 			sewingDTO.setColor(sewingDTO.getColor());
 			sewingDTO.setPrice(2500);
@@ -100,6 +100,41 @@ public class SewingDAOImple implements SewingDAO {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			transaction.rollback();
+
+		} finally {
+			if (openSession != null) {
+				openSession.close();
+				System.out.println("Session connection closed.........");
+			} else {
+				System.out.println("Session connectio Failed..........");
+			}
+
+			if (sessionFactory != null) {
+				sessionFactory.close();
+				System.out.println("Session Factory connection closed......!");
+			} else {
+				System.out.println("Session connection failed");
+			}
+		}
+	}
+
+	public void deleteSewingData() {
+		System.out.println("inside sewingdao imple delete method....");
+		SessionFactory sessionFactory = null;
+		Session openSession = null;
+		Transaction beginTransaction = null;
+		try {
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+			openSession = sessionFactory.openSession();
+			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 1);
+			beginTransaction = openSession.beginTransaction();
+			openSession.delete(sewingDTO);
+			beginTransaction.commit();
+			System.out.println("Record deleted successfull.....");
+
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			beginTransaction.rollback();
 
 		} finally {
 			if (openSession != null) {

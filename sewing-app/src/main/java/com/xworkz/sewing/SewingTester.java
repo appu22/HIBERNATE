@@ -14,7 +14,8 @@ public class SewingTester {
 
 		SewingService service = new SewingServiceImple();
 		SewingDAO dao = new SewingDAOImple();
-		dao.updatSewing();
+//		dao.updatSewing();
+		dao.deleteSewingData();
 //		service.validateSewingDetails(dto);
 //		service.validateFetchData();
 
