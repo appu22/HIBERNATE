@@ -12,7 +12,7 @@ public class SewingServiceImple implements SewingService {
 		System.out.println("invoking   Sewing Service Imple");
 	}
 
-	public void validateSewingDetails(SewingDTO dto) {
+	public void validateSaveSewingDetails(SewingDTO dto) {
 
 		boolean validate = true;
 		if (dto.getName() == null || dto.getName().length() < 3) {
@@ -41,6 +41,16 @@ public class SewingServiceImple implements SewingService {
 	public void validateFetchData() {
 		System.out.println("Inside validate Fetch Data ");
 		daoImple.getSewingData();
+	}
+
+	public void validateUpdatSewingNameByID() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void validateDeleteSewingData() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

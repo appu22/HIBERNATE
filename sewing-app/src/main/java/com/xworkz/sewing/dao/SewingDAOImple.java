@@ -2,32 +2,27 @@ package com.xworkz.sewing.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 import com.xworkz.sewing.dto.SewingDTO;
+import com.xworkz.singleton.SessionFact;
 
 public class SewingDAOImple implements SewingDAO {
 
 	public void save(SewingDTO dto) {
 		System.out.println("inside save method");
-		SessionFactory sessionFactory = null;
 		Session session = null;
-		Transaction trasaction = null;
 		try {
-			Configuration configuration = new Configuration();
-			configuration.configure("hibernate.cfg.xml");
-			sessionFactory = configuration.buildSessionFactory();
-			session = sessionFactory.openSession();
-			trasaction = session.beginTransaction();
+			SessionFactory factory = SessionFact.getFactory();// calling get method
+			// created singlton class //only one object created
+			session = factory.openSession();
+			session.beginTransaction();
 //			session.save(dto);
 			session.persist(dto);
-			trasaction.commit();
+			session.getTransaction().commit();
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			trasaction.rollback();
-
+			session.getTransaction().rollback();
 		} finally {
 			if (session != null) {
 				session.close();
@@ -35,23 +30,16 @@ public class SewingDAOImple implements SewingDAO {
 			} else {
 				System.out.println("Seesion connection failed....!");
 			}
-			if (sessionFactory != null) {
-				sessionFactory.close();
-				System.out.println("Session Factory closed......");
-			} else {
-				System.out.println("Session Factory Connection failed...");
-			}
 		}
 	}
 
 	public void getSewingData() {
 		System.out.println("inside sewing method....");
-		SessionFactory sessionFactory = null;
 		Session openSession = null;
 		try {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-			openSession = sessionFactory.openSession();
-			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 1);
+			SessionFactory factory = SessionFact.getFactory();
+			openSession = factory.openSession();
+			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 2);
 			System.out.println(sewingDTO);
 
 		} catch (Exception exception) {
@@ -65,24 +53,16 @@ public class SewingDAOImple implements SewingDAO {
 				System.out.println("Session connectio Failed..........");
 			}
 
-			if (sessionFactory != null) {
-				sessionFactory.close();
-				System.out.println("Session Factory connection closed......!");
-			} else {
-				System.out.println("Session connection failed");
-			}
 		}
 	}
 
 	public void updatSewing() {
 		System.out.println("inside sewing update  method....");
-		SessionFactory sessionFactory = null;
 		Session openSession = null;
-		Transaction transaction = null;
 		try {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-			openSession = sessionFactory.openSession();
-			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 1);
+			SessionFactory factory = SessionFact.getFactory();
+			openSession = factory.openSession();
+			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 2);
 			double price = sewingDTO.getPrice();
 			System.out.println("price " + price);
 			System.out.println("before updating..........");
@@ -92,14 +72,14 @@ public class SewingDAOImple implements SewingDAO {
 			sewingDTO.setPrice(2500);
 			sewingDTO.setModel(sewingDTO.getModel());
 			sewingDTO.isWorking();
-			transaction = openSession.beginTransaction();
+			openSession.beginTransaction();
 			openSession.update(sewingDTO);
-			transaction.commit();
+			openSession.getTransaction().commit();
 			System.out.println("price updated");
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
-			transaction.rollback();
+			openSession.getTransaction().rollback();
 
 		} finally {
 			if (openSession != null) {
@@ -109,32 +89,25 @@ public class SewingDAOImple implements SewingDAO {
 				System.out.println("Session connectio Failed..........");
 			}
 
-			if (sessionFactory != null) {
-				sessionFactory.close();
-				System.out.println("Session Factory connection closed......!");
-			} else {
-				System.out.println("Session connection failed");
-			}
 		}
 	}
 
 	public void deleteSewingData() {
 		System.out.println("inside sewingdao imple delete method....");
-		SessionFactory sessionFactory = null;
 		Session openSession = null;
-		Transaction beginTransaction = null;
 		try {
-			sessionFactory = new Configuration().configure().buildSessionFactory();
-			openSession = sessionFactory.openSession();
+
+			SessionFactory factory = SessionFact.getFactory();
+			openSession = factory.openSession();
 			SewingDTO sewingDTO = openSession.get(SewingDTO.class, 1);
-			beginTransaction = openSession.beginTransaction();
+			openSession.beginTransaction();
 			openSession.delete(sewingDTO);
-			beginTransaction.commit();
+			openSession.getTransaction().commit();
 			System.out.println("Record deleted successfull.....");
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
-			beginTransaction.rollback();
+			openSession.getTransaction().rollback();
 
 		} finally {
 			if (openSession != null) {
@@ -143,13 +116,12 @@ public class SewingDAOImple implements SewingDAO {
 			} else {
 				System.out.println("Session connectio Failed..........");
 			}
+			System.out.println("SessionFactory.........Closed...");
+			SessionFact.closeFactory();
+			// calling closeFactory method using class name
+			// its static method
+			//
 
-			if (sessionFactory != null) {
-				sessionFactory.close();
-				System.out.println("Session Factory connection closed......!");
-			} else {
-				System.out.println("Session connection failed");
-			}
 		}
 	}
 }
