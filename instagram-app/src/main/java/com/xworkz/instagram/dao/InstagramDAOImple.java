@@ -1,9 +1,12 @@
 package com.xworkz.instagram.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.xworkz.instagram.dto.InstagramDTO;
 
@@ -74,6 +77,36 @@ public class InstagramDAOImple implements InstagramDAO {
 			}
 		}
 
+	}
+
+	public void getAllRecord() {
+		SessionFactory factory = null;
+		Session session = null;
+		try {
+			factory = new Configuration().configure().buildSessionFactory();
+			session = factory.openSession();
+			String hql = "from InstagramDTO";
+//			String hql = "select name from  com.xworkz.instagram.dto.InstagramDTO where id=2";
+			Query query = session.createQuery(hql);
+			List<InstagramDTO> list = query.list();
+			for (InstagramDTO instagramDTO : list) {
+				System.out.println(instagramDTO);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (session != null && factory != null) {
+				System.out.println("Session and Factory Closed.........");
+				session.close();
+				factory.close();
+
+			} else {
+				System.out.println("Session and Factory not connected");
+			}
+		}
 	}
 
 }

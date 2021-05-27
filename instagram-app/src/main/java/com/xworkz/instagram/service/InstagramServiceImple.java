@@ -34,6 +34,7 @@ public class InstagramServiceImple implements InstagramService {
 		if (flag) {
 			dao.save(instagramDTO);
 		}
+		
 
 	}
 
