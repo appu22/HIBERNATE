@@ -8,8 +8,8 @@ public interface SewingService {
 
 	public void validateFetchData();
 
-	public void validateUpdatSewingNameByID();
-
-	public void validateDeleteSewingData();
+//	public void validateUpdatSewingNameByID();
+//
+//	public void validateDeleteSewingData();
 
 }

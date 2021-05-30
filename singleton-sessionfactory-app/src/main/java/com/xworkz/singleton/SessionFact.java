@@ -25,8 +25,11 @@ public class SessionFact {
 	}
 
 	public static void closeFactory() {
-		System.out.println("Session Factory Closed....");
-		factory.close();
+		if (Objects.nonNull(factory)) {
+			System.out.println("Session Factory Closed....");
+			factory.close();
+		} else {
+			System.out.println("Session Factory not closed...");
+		}
 	}
-
 }

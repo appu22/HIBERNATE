@@ -43,14 +43,14 @@ public class SewingServiceImple implements SewingService {
 		daoImple.getSewingData();
 	}
 
-	public void validateUpdatSewingNameByID() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void validateDeleteSewingData() {
-		// TODO Auto-generated method stub
-
-	}
+//	public void validateUpdatSewingNameByID() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	public void validateDeleteSewingData() {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 }

@@ -34,6 +34,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Vitthal/Desktop/problems/SessionFactory.jar"/>
+	<classpathentry kind="lib" path="F:/appuuuu/my jar files/SessionFactory.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

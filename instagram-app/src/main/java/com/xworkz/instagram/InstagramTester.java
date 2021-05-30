@@ -16,10 +16,19 @@ public class InstagramTester {
 		InstagramService service = new InstagramServiceImple();
 
 		InstagramDAO daoimple = new InstagramDAOImple();
-		daoimple.getAllRecord();
-		
+
+		System.out.println("********** aggregate functions  *************");
+		daoimple.getMaximumNofUsersOfInstagram();
+//		daoimple.getMinimumNumberOfUsersInsta();
+//		daoimple.getCountOfAllInstagramRecords();
+//		daoimple.getSumOfAllInstagramUsers();
+
+//		System.out.println("**********  *************");
+//		daoimple.getCeoNamesByInstaName();
 //		daoimple.save(dto);
 //		daoimple.getInstagram();
+//		daoimple.getAllRecord();
+//		daoimple.getOneRowDataOfInstagram();
 		System.out.println("Program End");
 	}
 

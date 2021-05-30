@@ -13,6 +13,7 @@ public class SewingTester {
 		SewingDTO dto = new SewingDTO("Machine", "Red", "M654", 5000.0, true);
 
 		SewingService service = new SewingServiceImple();
+		
 //		SewingDAO dao = new SewingDAOImple();
 //		dao.updatSewing();
 //		dao.deleteSewingData();

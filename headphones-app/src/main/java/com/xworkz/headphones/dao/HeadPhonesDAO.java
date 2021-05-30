@@ -4,7 +4,7 @@ import com.xworkz.headphones.dto.HeadPhoneDTO;
 
 public interface HeadPhonesDAO {
 
-	void saveHeadphoneData(HeadPhoneDTO dto);
+	public void saveHeadphoneData(HeadPhoneDTO dto);
 
 	void fetchHeadphoneData();
 
@@ -13,5 +13,11 @@ public interface HeadPhonesDAO {
 	void updateHeadphoneData();
 
 	void fetchAllHeadphoneRecords();
+
+	void fecthHeaphoneDeatilsByName(String name);
+
+	void fecthHeadPhonePriceByName(String name);
+
+	void fecthHeadPhoneColorAndNameById(int id);
 
 }
