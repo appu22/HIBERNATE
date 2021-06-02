@@ -23,7 +23,7 @@ import lombok.Setter;
 //named query 
 @NamedQueries({ @NamedQuery(name = "fetchAllHeadphoneRecords", query = "from HeadPhoneDTO"),
 		@NamedQuery(name = "fecthHeaphoneDeatilsByName", query = "select head.headPhone_Type from HeadPhoneDTO AS head WHERE head.headPhone_Name=:name"),
-		@NamedQuery(name = "fecthHeadPhonePriceByName", query = "select headPhone_Price from HeadPhoneDTO  where headPhone_Name=:hpname "),
+		@NamedQuery(name = "fecthHeadPhonePriceByName", query = "select headPhone_Price,headPhone_Type from HeadPhoneDTO  where headPhone_Name=:hpname "),
 		@NamedQuery(name = "fecthHeadPhoneColorAndNameById ", query = "select headPhone_Color from HeadPhoneDTO where headPhone_Id=:headid") })
 public class HeadPhoneDTO implements java.io.Serializable {// clss name //object name
 

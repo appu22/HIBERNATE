@@ -207,8 +207,12 @@ public class HeadPhonesDAOImple implements HeadPhonesDAO {
 //			select HEADPHONE_PRICE FROM hibernate.headphone_table where HEADPHONE_ID=1 and HEADPHONE_NAME='One+' ;
 			Query query = session.createNamedQuery("fecthHeadPhonePriceByName");
 			query.setParameter("hpname", name);
-			List list = query.list();
-			System.out.println(list);
+			List<HeadPhoneDTO> list = query.list();
+			for (HeadPhoneDTO headphone : list) {
+				System.out.println(headphone);
+				
+			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
